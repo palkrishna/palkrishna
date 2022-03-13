@@ -81,12 +81,12 @@ def WMMSE(num_d2d, H, Pmax, var_noise):
 
 for speed in range(3,61,3) :
  sum_capacity =0  
- for iteration in range(5) :
+ for iteration in range(50) :
   rx_loc, tx_loc = loc_init(d2d_dist, num_d2d)           # initializing tx-rx pairs location 
   cap = 0
   a=0
 
-  for sim_time  in range(1) :
+  for sim_time  in range(1000) :
      rx_loc, tx_loc = get_loc(rx_loc, tx_loc,num_d2d,speed)
      h=np.zeros((num_d2d,num_d2d))
      for i in range(num_d2d) :
@@ -95,9 +95,8 @@ for speed in range(3,61,3) :
         pl_dB = 36.85 + 30*log10(d) +18.9*log10(C_frequency)
         pl = 10**(pl_dB/10)
         h[i,j] = 0.5 * np.random.randn() ** 2 + 0.5 * np.random.randn() ** 2
-        print(h[i,j])
         h[i,j] = h[i,j]*pl
-        print(f"after h is {h[i,j]}")
+        
      p_opt=WMMSE(num_d2d,h,p_t,1)  
      print(p_opt)    
      for k in range(num_d2d):
@@ -114,6 +113,6 @@ for speed in range(3,61,3) :
             a+=1
  #           break
   sum_capacity += cap/a        
- sum_capacity =sum_capacity/5
+ sum_capacity =sum_capacity/50
  ws1.append([sum_capacity])
 wb1.save('receiver1.xlsx')
