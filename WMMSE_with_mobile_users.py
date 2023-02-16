@@ -6,7 +6,7 @@ from  random import randrange,uniform
 import numpy as np
 from math import cos,sin,pi,log10,log2,sqrt
 import pylab
-import WMMSE_algorithm
+from WMMSE_algorithm import WMMSE
 ######################## Simulation Parameters #################
 bw = 1*10**9              # Bandwidth = 1GHz
 p_t_dB = 23               # maximum d2d transmit power in dB
